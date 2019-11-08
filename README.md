@@ -13,10 +13,14 @@ An Archlinux build using Packer and Ansible based on the build by `binary-manu`.
 
 ## Installed system
 
-3 partition system using GRUB efibootmgr. 
-/dev/sda1 256 MiB esp 
-/dev/sda2 4 GiB swap
-/dev/sda3 37 GiB /
+- 2 CPU, 2 GB RAM
+- EFI enable
+- VMSVGA 128 MB video ram, 3D acceleration
+- CoreAudio
+- 3 partition system using GRUB efibootmgr. 
+    - /dev/sda1 256 MiB esp 
+    - /dev/sda2 4 GiB swap
+    - /dev/sda3 37 GiB (or what remains) /
 
 The partion role does have parameters to create a home directory but was not used.
 
