@@ -2,7 +2,7 @@
 
 Credits: [binary-many/arch-ansible](https://github.com/binary-manu/arch-ansible)
 
-An Archlinux build using Packer and Ansible based on the build by `binary-manu`. I wanted a base Archlinux build where I could test out various desktop environments.
+An Archlinux build using Packer and Ansible based on the build by `binary-manu`. I wanted a base Archlinux build where I could test out various desktop environments. This will produce a Virtualbox image that can be imported.
 
 ## Versions used
 
