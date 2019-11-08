@@ -27,3 +27,7 @@ The partion role does have parameters to create a home directory but was not use
 ## Users
 
 Edit `ansible\roles\users\defaults\main.yaml.txt` with accounts and words as needed, then save as `main.yaml`.
+
+## Build
+
+To build, cd to the `packer` directory, then type `packer build -force packer-template.json`. The default output is `packer/output-virtualbox-iso` which contains the ovf to import into VirtualBox.
