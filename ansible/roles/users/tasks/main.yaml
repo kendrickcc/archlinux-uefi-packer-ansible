@@ -1,0 +1,36 @@
+- name: Add initial users
+  user:
+    shell: /bin/bash
+    name: "{{ item }}"
+    groups:
+        "{%- if users_info[item].is_admin | default(True) | bool -%}
+            {{- (['wheel'] + (users_info[item].groups | default([]))) | unique -}}
+        {%- else -%}
+            {{- users_info[item].groups | default([]) | unique -}}
+        {%- endif -%}"
+    password: "{{ users_info[item].password |
+        password_hash('sha512', 1000000 | random )}}"
+  loop: "{{ global_admins }}"
+  register: users_created
+
+- name: Set root password
+  user:
+    name: root
+    password: "{{ users_info['root'].password |
+        password_hash('sha512', 1000000 | random )}}"
+
+- name: Allow admins to sudo by authorizing the wheel group
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^%wheel ALL='
+    line: '%wheel ALL=(ALL) ALL'
+    validate: '/usr/sbin/visudo -cf %s'
+
+- name: Copy bashrc home dirs
+  become: yes
+  become_user: "{{ item }}"
+  copy:
+    src: bashrc
+    dest: "{{ users_created | user_home(item) }}/.bashrc"
+  loop: "{{ global_admins }}"

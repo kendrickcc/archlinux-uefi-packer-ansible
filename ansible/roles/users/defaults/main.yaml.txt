@@ -1,0 +1,9 @@
+# Rename this file to main.yaml and update with a user name, password and root password.
+
+users_info:
+  root:
+    password: "enter password here"
+  regular user name here:
+    password: "user password here"
+    is_admin: true # Optional item, true if missing
+    groups: []     # Optional item, empty list if missing

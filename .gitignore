@@ -1,0 +1,5 @@
+/ansible/*.retry
+/ansible/group_vars/all/*
+/packer/packer_cache/
+/packer/output-*/
+ansible/roles/users/defaults/main.yaml

@@ -1,0 +1,17 @@
+- name: Create a user that can use passwordless sudo
+  user:
+    name: "{{ global_passwordless_sudo_user }}"
+    shell: /bin/bash
+    password: "!"
+    system: yes
+  notify: Delete passwordless sudo user
+  changed_when: yes # Always mark as changed, so that the handler can be invoked
+
+- name: Add passwordless sudo user to sudoers
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: "^{{ global_passwordless_sudo_user | regex_escape }} "
+    line: "{{ global_passwordless_sudo_user }} ALL=(ALL) NOPASSWD: ALL"
+    validate: '/usr/sbin/visudo -cf %s'
+

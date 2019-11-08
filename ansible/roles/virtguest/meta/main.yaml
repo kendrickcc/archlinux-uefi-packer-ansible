@@ -1,0 +1,3 @@
+dependencies:
+  - role: proxy
+  - role: virtguest_force

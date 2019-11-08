@@ -1,0 +1,21 @@
+---
+# Install GRUB and EFI bootloader
+
+- name: Create efi directory
+  shell: arch-chroot /mnt mkdir /boot/efi
+
+- name: mount boot
+  shell: arch-chroot /mnt mount /dev/sda1 /boot/efi
+
+- name: grub-install
+  shell: arch-chroot /mnt grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
+  register: results
+
+- name: grub-mkconfig
+  shell: arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
+
+- name: Create EFI/BOOT directory
+  shell: arch-chroot /mnt mkdir /boot/efi/EFI/BOOT
+
+- name: Copy GRUB file to boot
+  shell: arch-chroot /mnt cp /boot/efi/EFI/GRUB/grubx64.efi /boot/efi/EFI/BOOT/BOOTX64.EFI

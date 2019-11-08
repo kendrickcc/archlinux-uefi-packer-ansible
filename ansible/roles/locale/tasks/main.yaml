@@ -1,0 +1,26 @@
+- name: Set timezone
+  timezone:
+    name: "{{ locale_timezone }}"
+    hwclock: UTC
+
+- name: Generate locale
+  locale_gen:
+    name: "{{ locale_locale }}"
+
+- name: Set locale
+  shell: set -o pipefail || exit 1;
+    { localectl status &&
+      localectl set-locale {{ locale_locale }} &&
+      localectl status
+    ;} | sort | uniq -u
+  register: locale_changed
+  changed_when: locale_changed.stdout != ""
+
+- name: Set keymap
+  shell: set -o pipefail || exit 1;
+    { localectl status &&
+      localectl set-keymap {{ locale_keymap }} &&
+      localectl status
+    ;} | sort | uniq -u
+  register: keymap_changed
+  changed_when: keymap_changed.stdout != ""

@@ -1,0 +1,53 @@
+- name: Enable services on installed system
+  command: arch-chroot {{ global_mount_point}}
+    systemctl enable {{ item }}
+  loop:
+    - sshd
+    - NetworkManager
+
+- name: Create root's .ssh
+  file:
+    state: directory
+    path:  "{{ global_mount_point }}/root/.ssh/"
+
+- name: Check for root's autorized keys
+  stat:
+    path: /root/.ssh/authorized_keys
+  register: root_auth_keys
+
+- name: Copy root's authorized keys
+  copy:
+    remote_src: yes
+    src: /root/.ssh/authorized_keys
+    dest: "{{ global_mount_point }}/root/.ssh/"
+  when: root_auth_keys.stat.exists == true
+
+- name: Copy ssh host keys
+  copy:
+    remote_src: yes
+    src: /etc/ssh/{{ item }}
+    dest: "{{ global_mount_point }}/etc/ssh/{{ item }}"
+    mode: "0600"
+  loop:
+    - ssh_host_rsa_key
+    - ssh_host_ecdsa_key
+    - ssh_host_dsa_key
+    - ssh_host_ed25519_key
+    - ssh_host_rsa_key.pub
+    - ssh_host_ecdsa_key.pub
+    - ssh_host_dsa_key.pub
+    - ssh_host_ed25519_key.pub
+
+- name: Generate fstab
+  vars:
+    fstab: "{{ global_mount_point }}/etc/fstab"
+  shell: |
+    set -e
+    set -o pipefail
+    {
+      if [ -f {{ fstab }} ]; then cat {{ fstab }}; fi
+      genfstab -U {{ global_mount_point }} > {{ fstab }}
+      cat {{ fstab }}
+    } | sort | uniq -u
+  register: fstab_created
+  changed_when: fstab_created.stdout

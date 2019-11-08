@@ -1,0 +1,50 @@
+---
+- name: Boot partition
+  parted:
+    device: "{{ partition.name }}"
+    label: gpt
+    number: "{{ partition.volumes.boot.number }}"
+    part_type: primary
+    flags: "{{ partition.volumes.boot.flags }}"
+    part_end: "{{ partition.volumes.boot.size }}"
+    state: present
+
+- name: Swap partition
+  parted:
+    device: "{{ partition.name }}"
+    label: gpt
+    number: "{{ partition.volumes.swap.number }}"
+    part_type: primary
+    part_start: "{{ partition.volumes.boot.size }}"
+    part_end: "{{ partition.volumes.swap.size }}"
+    state: present
+
+- name: Root partition
+  parted:
+    device: "{{ partition.name }}"
+    label: gpt
+    number: "{{ partition.volumes.root.number }}"
+    part_type: primary
+    part_start: "{{ partition.volumes.swap.size }}"
+    state: present
+
+- name: format boot
+  filesystem:
+    dev: "{{ partition.name }}{{ partition.volumes.boot.number }}"
+    fstype: vfat
+    opts: -F32
+
+- name: format root
+  filesystem:
+    dev: "{{ partition.name }}{{ partition.volumes.root.number }}"
+    fstype: ext4
+
+- name: mount root
+  mount:
+    src: "{{ partition.name }}{{ partition.volumes.root.number }}"
+    path: "{{ partition.volumes.root.path }}"
+    fstype: ext4
+    state: mounted
+
+- name: swap make and enable
+  shell: mkswap {{ partition.name }}{{ partition.volumes.swap.number }} && swapon {{ partition.name }}{{ partition.volumes.swap.number }}

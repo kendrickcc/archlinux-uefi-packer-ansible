@@ -1,0 +1,5 @@
+- name: Install utilities
+  pacman:
+      name: "{{ utils_packages }}"
+      state: latest
+      update_cache: yes

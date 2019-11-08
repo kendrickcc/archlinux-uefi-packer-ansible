@@ -1,0 +1,28 @@
+- name: Copy custom repositories definitions
+  copy:
+    dest: /etc/pacman.d/{{ item.name }}.repo
+    content: |
+      [{{ item.name }}]
+      Server = {{ item.server }}
+      SigLevel = {{ item.siglevel }}
+  loop: "{{ custom_repos_list }}"
+
+- name: Include repository definitions in pacman.conf
+  lineinfile:
+    path: /etc/pacman.conf
+    regexp: "^Include = /etc/pacman.d/{{ item.name | regex_escape }}\\.repo$"
+    line: Include = /etc/pacman.d/{{ item.name }}.repo
+    create: no
+    state: present
+    insertbefore: ^[[]core[]]$
+  loop: "{{ custom_repos_list }}"
+
+- name: Add custom servers
+  lineinfile:
+    path: /etc/pacman.d/mirrorlist
+    regexp: "^Server = {{ item | regex_escape }}$"
+    line: "Server = {{ item }}"
+    create: no
+    state: present
+    insertbefore: BOF
+  loop: "{{ custom_repos_servers | reverse | list }}"

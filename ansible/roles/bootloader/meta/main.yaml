@@ -1,0 +1,8 @@
+dependencies:
+  - role: base_packages
+  - role: pacstrap
+    vars:
+      packages:
+        - grub
+        - efibootmgr
+      chroot: "{{ global_mount_point }}"

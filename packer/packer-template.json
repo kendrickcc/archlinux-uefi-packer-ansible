@@ -1,0 +1,134 @@
+{
+  "variables": {
+    "http_proxy": "{{env `http_proxy`}}",
+    "https_proxy": "{{env `https_proxy`}}",
+    "no_proxy": "{{env `no_proxy`}}"
+  },
+  "builders": [
+    {
+      "boot_command": "<enter><wait30>systemctl start sshd && mkdir -m 0700 /root/.ssh && echo '{{.SSHPublicKey}}' >> /root/.ssh/authorized_keys<enter>",
+      "boot_wait": "10s",
+      "cpus": "2",
+      "disk_size": 40000,
+      "guest_additions_mode": "disable",
+      "guest_os_type": "ArchLinux_64",
+      "hard_drive_interface": "sata",
+      "headless": "true",
+      "http_directory": "http",
+      "iso_checksum_url": "/Users/chris/git/iso/archlinux-{{isotime \"2006.01\"}}.01-md5sums.txt",
+      "iso_interface": "sata",
+      "iso_url": "/Users/chris/git/iso/archlinux-{{isotime \"2006.01\"}}.01-x86_64.iso",
+      "memory": "2048",
+      "post_shutdown_delay" : "10s",
+      "shutdown_command": "poweroff",
+      "sound": "coreaudio",
+      "ssh_wait_timeout": "1m",
+      "ssh_username": "root",
+      "ssh_clear_authorized_keys": true,
+      "type": "virtualbox-iso",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--firmware",
+          "efi64"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--accelerate3d",
+          "on"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--graphicscontroller",
+          "vmsvga"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--vram",
+          "128"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--rtcuseutc",
+          "on"
+        ],
+        [
+          "storagectl",
+          "{{.Name}}",
+          "--name",
+          "IDE Controller",
+          "--remove"
+        ]
+      ],
+      "vm_name": "archlinux-{{isotime \"20060102T1504\"}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "prepare.sh",
+      "environment_vars": [
+        "http_proxy={{user `http_proxy`}}",
+        "https_proxy={{user `https_proxy`}}",
+        "no_proxy={{user `no_proxy`}}"
+      ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_dir": "../ansible",
+      "playbook_file": "../ansible/site.yaml",
+      "extra_arguments": [
+        "--skip-tags=reboot",
+        "--tags=bootstrap",
+        "-e",
+        "http_proxy={{user `http_proxy`}}",
+        "-e",
+        "https_proxy={{user `https_proxy`}}",
+        "-e",
+        "no_proxy={{user `no_proxy`}}"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": "reboot",
+      "expect_disconnect": true
+    },
+    {
+      "type": "shell",
+      "pause_before": "1m",
+      "script": "prepare.sh",
+      "environment_vars": [
+        "http_proxy={{user `http_proxy`}}",
+        "https_proxy={{user `https_proxy`}}",
+        "no_proxy={{user `no_proxy`}}"
+      ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_dir": "../ansible",
+      "playbook_file": "../ansible/site.yaml",
+      "extra_arguments": [
+        "--skip-tags=reboot",
+        "--tags=mainconfig",
+        "-e",
+        "http_proxy={{user `http_proxy`}}",
+        "-e",
+        "https_proxy={{user `https_proxy`}}",
+        "-e",
+        "no_proxy={{user `no_proxy`}}",
+        "-e",
+        "global_portable_image=True"
+      ]
+    },
+    {
+      "type": "shell",
+      "script": "clean.sh"
+    }
+  ],
+  "_modeline": " vi: set sw=2 sts=-1 et:"
+}

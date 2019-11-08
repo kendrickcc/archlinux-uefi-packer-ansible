@@ -1,0 +1,11 @@
+custom_repos_list: [
+#  {
+#    name: cache,
+#    server: "http://10.0.2.2/x86_64/",
+#    siglevel: Optional TrustAll
+#  }
+]
+
+custom_repos_servers: [
+#  "http://localhost:8080/%repo/os/$arch"
+]

@@ -1,0 +1,21 @@
+partition:
+  name: /dev/sda
+  volumes:
+    boot:
+      number: 1
+      label: gpt
+      size: 256MiB
+      flags: esp
+      path: /boot/efi 
+    swap:
+      number: 2
+      size: 2GiB
+      type: swap 
+    root:
+      number: 3
+      size: 23GiB
+      path: /mnt
+    home:
+      number: 4
+      size: 12GiB
+      path: /mnt/home
