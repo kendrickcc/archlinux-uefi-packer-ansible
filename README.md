@@ -19,3 +19,7 @@ An Archlinux build using Packer and Ansible based on the build by `binary-manu`.
 /dev/sda3 37 GiB /
 
 The partion role does have parameters to create a home directory but was not used.
+
+## Users
+
+Edit `ansible\roles\users\defaults\main.yaml.txt` with accounts and words as needed, then save as `main.yaml`.
