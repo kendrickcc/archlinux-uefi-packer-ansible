@@ -28,41 +28,22 @@
       "type": "virtualbox-iso",
       "vboxmanage": [
         [
-          "modifyvm",
-          "{{.Name}}",
-          "--firmware",
-          "efi64"
+          "modifyvm","{{.Name}}","--firmware","efi64"
         ],
         [
-          "modifyvm",
-          "{{.Name}}",
-          "--accelerate3d",
-          "on"
+          "modifyvm","{{.Name}}","--accelerate3d","on"
         ],
         [
-          "modifyvm",
-          "{{.Name}}",
-          "--graphicscontroller",
-          "vmsvga"
+          "modifyvm","{{.Name}}","--graphicscontroller","vmsvga"
         ],
         [
-          "modifyvm",
-          "{{.Name}}",
-          "--vram",
-          "128"
+          "modifyvm","{{.Name}}","--vram","128"
         ],
         [
-          "modifyvm",
-          "{{.Name}}",
-          "--rtcuseutc",
-          "on"
+          "modifyvm","{{.Name}}","--rtcuseutc","on"
         ],
         [
-          "storagectl",
-          "{{.Name}}",
-          "--name",
-          "IDE Controller",
-          "--remove"
+          "storagectl","{{.Name}}","--name","IDE Controller","--remove"
         ]
       ],
       "vm_name": "archlinux-{{isotime \"20060102T1504\"}}"
@@ -85,12 +66,9 @@
       "extra_arguments": [
         "--skip-tags=reboot",
         "--tags=bootstrap",
-        "-e",
-        "http_proxy={{user `http_proxy`}}",
-        "-e",
-        "https_proxy={{user `https_proxy`}}",
-        "-e",
-        "no_proxy={{user `no_proxy`}}"
+        "-e","http_proxy={{user `http_proxy`}}",
+        "-e","https_proxy={{user `https_proxy`}}",
+        "-e","no_proxy={{user `no_proxy`}}"
       ]
     },
     {
@@ -115,14 +93,10 @@
       "extra_arguments": [
         "--skip-tags=reboot",
         "--tags=mainconfig",
-        "-e",
-        "http_proxy={{user `http_proxy`}}",
-        "-e",
-        "https_proxy={{user `https_proxy`}}",
-        "-e",
-        "no_proxy={{user `no_proxy`}}",
-        "-e",
-        "global_portable_image=True"
+        "-e","http_proxy={{user `http_proxy`}}",
+        "-e","https_proxy={{user `https_proxy`}}",
+        "-e","no_proxy={{user `no_proxy`}}",
+        "-e","global_portable_image=True"
       ]
     },
     {
