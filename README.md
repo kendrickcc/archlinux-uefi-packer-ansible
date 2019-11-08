@@ -10,6 +10,7 @@ An Archlinux build using Packer and Ansible based on the build by `binary-manu`.
 - Packer 1.4.4
 - Ansible 2.9
 - Archlinux 2019-11-01
+    - Using mirrors.kernel.org/archlinux as the mirror site.
 
 ## Installed system
 
