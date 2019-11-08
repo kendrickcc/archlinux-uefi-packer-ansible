@@ -1,0 +1,11 @@
+packages:
+# X packages
+  - xorg
+  #- xorg-apps
+  #- xorg-drivers
+  #- xorg-apps
+  #- xorg-fonts
+  #- xorg-xinit
+# xfce4 packages
+  - xfce4
+  - xfce4-goodies

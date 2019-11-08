@@ -34,6 +34,8 @@
       tags: [virtguest]
     - role: utils
       tags: [utils]
+    - role: audio
+    - role: desktop_env
 
 - name: Clean and reboot
   hosts: all

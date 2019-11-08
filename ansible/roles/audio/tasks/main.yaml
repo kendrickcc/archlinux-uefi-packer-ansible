@@ -1,4 +1,4 @@
-- name: Install utilities
+- name: Install audio programs
   pacman:
       name: "{{ packages }}"
       state: latest

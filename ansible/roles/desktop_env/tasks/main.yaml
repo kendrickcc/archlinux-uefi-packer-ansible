@@ -1,4 +1,4 @@
-- name: Install utilities
+- name: Install desktop environment
   pacman:
       name: "{{ packages }}"
       state: latest
