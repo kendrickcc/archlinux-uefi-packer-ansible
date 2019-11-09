@@ -1,3 +1,3 @@
 #!/bin/sh
 
-packer build -force packer-template.json
+packer build -force packer.json

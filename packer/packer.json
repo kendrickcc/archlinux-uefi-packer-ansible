@@ -107,5 +107,14 @@
       "script": "clean.sh"
     }
   ],
+  "post-processors": [
+    [
+      {
+        "type": "manifest",
+        "output": "manifest.json",
+        "strip_path": true
+      }
+    ]
+  ],
   "_modeline": " vi: set sw=2 sts=-1 et:"
 }

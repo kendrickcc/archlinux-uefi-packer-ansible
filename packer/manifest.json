@@ -1,0 +1,23 @@
+{
+  "builds": [
+    {
+      "name": "virtualbox-iso",
+      "builder_type": "virtualbox-iso",
+      "build_time": 1573331804,
+      "files": [
+        {
+          "name": "archlinux-20191109T1844-disk001.vmdk",
+          "size": 1647216640
+        },
+        {
+          "name": "archlinux-20191109T1844.ovf",
+          "size": 6527
+        }
+      ],
+      "artifact_id": "VM",
+      "packer_run_uuid": "7e4b464c-53e6-46b9-33bc-62d7462e1bef",
+      "custom_data": null
+    }
+  ],
+  "last_run_uuid": "7e4b464c-53e6-46b9-33bc-62d7462e1bef"
+}

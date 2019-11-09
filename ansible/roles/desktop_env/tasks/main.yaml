@@ -4,10 +4,10 @@
       state: latest
       update_cache: yes
 
-- name: Copy xfce's xinitrc to user home
-  become: yes
-  become_user: "{{ item }}"
-  copy:
-    src: xinitrc
-    dest: "{{ users_created | user_home(item) }}/.xinitrc"
-  loop: "{{ global_admins }}"
+#- name: Copy xfce's xinitrc to user home
+#  become: yes
+#  become_user: "{{ item }}"
+#  copy:
+#    src: xinitrc
+#    dest: "{{ users_created | user_home(item) }}/.xinitrc"
+#  loop: "{{ global_admins }}"
