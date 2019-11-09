@@ -31,4 +31,4 @@ Edit `ansible\roles\users\defaults\main.yaml.txt` with accounts and words as nee
 
 ## Build
 
-To build, cd to the `packer` directory, then type `packer build -force packer-template.json`. The default output is `packer/output-virtualbox-iso` which contains the ovf to import into VirtualBox.
+To build, cd to the `packer` directory, then type `packer build -force packer.json`. The default output is `packer/output-virtualbox-iso` which contains the ovf to import into VirtualBox.
