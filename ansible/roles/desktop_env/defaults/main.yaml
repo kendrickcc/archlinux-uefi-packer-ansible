@@ -1,11 +1,6 @@
 packages:
-# X packages
   - xorg
-  #- xorg-apps
-  #- xorg-drivers
-  #- xorg-apps
-  #- xorg-fonts
-  #- xorg-xinit
-# xfce4 packages
+  - xorg-server
+  - xorg-xinit
   - xfce4
   - xfce4-goodies

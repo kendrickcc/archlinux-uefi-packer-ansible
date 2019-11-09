@@ -3,6 +3,7 @@ base_packages_list:
   - base
   - base-devel
   - linux
+  - linux-firmware
   # Additional tools needed to run Ansible and get network connectivity
   # after we reboot
   - networkmanager

@@ -34,7 +34,7 @@
           "modifyvm","{{.Name}}","--accelerate3d","on"
         ],
         [
-          "modifyvm","{{.Name}}","--graphicscontroller","vmsvga"
+          "modifyvm","{{.Name}}","--graphicscontroller","vboxsvga"
         ],
         [
           "modifyvm","{{.Name}}","--vram","128"
@@ -44,6 +44,9 @@
         ],
         [
           "storagectl","{{.Name}}","--name","IDE Controller","--remove"
+        ],
+        [
+          "sharedfolder","add","{{.Name}}","--name","Shared","--hostpath","/Users/Shared","--automount"
         ]
       ],
       "vm_name": "archlinux-{{isotime \"20060102T1504\"}}"
