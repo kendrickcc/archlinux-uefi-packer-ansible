@@ -16,7 +16,7 @@ An Archlinux build using Packer and Ansible based on the build by `binary-manu`.
 
 - 2 CPU, 2 GB RAM
 - EFI enable
-- VMSVGA 128 MB video ram, 3D acceleration
+- VBoxSVGA 128 MB video ram, 3D acceleration
 - CoreAudio
 - 3 partition system using GRUB efibootmgr. 
     - /dev/sda1 256 MiB esp 
