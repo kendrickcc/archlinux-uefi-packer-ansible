@@ -1,0 +1,4 @@
+install xorg xorg-server deepin deepin-extra
+vi /etc/lightdm/lightdm.conf and uncomment greeter-session=example-gtk-gnome, change to lightdm-deepin-greeter
+systemctl start lightdm.service
+systemctl enable lightdm.service

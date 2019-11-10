@@ -3,21 +3,21 @@
     {
       "name": "virtualbox-iso",
       "builder_type": "virtualbox-iso",
-      "build_time": 1573331804,
+      "build_time": 1573335675,
       "files": [
         {
-          "name": "archlinux-20191109T1844-disk001.vmdk",
-          "size": 1647216640
+          "name": "archlinux-20191109T2130-disk001.vmdk",
+          "size": 1277940736
         },
         {
-          "name": "archlinux-20191109T1844.ovf",
+          "name": "archlinux-20191109T2130.ovf",
           "size": 6527
         }
       ],
       "artifact_id": "VM",
-      "packer_run_uuid": "7e4b464c-53e6-46b9-33bc-62d7462e1bef",
+      "packer_run_uuid": "4595d9a3-1264-38de-0da0-40f331edc032",
       "custom_data": null
     }
   ],
-  "last_run_uuid": "7e4b464c-53e6-46b9-33bc-62d7462e1bef"
+  "last_run_uuid": "4595d9a3-1264-38de-0da0-40f331edc032"
 }

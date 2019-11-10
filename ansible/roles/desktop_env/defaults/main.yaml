@@ -1,9 +1,9 @@
 packages:
-  # Need xorg-server
-  - xorg-server
+  #- xorg-server
   # xfce4 DE
-  - xfce4
-  - xfce4-goodies
+  #- xfce4
+  #- xfce4-goodies
   # Deepin
+  #- xorg
   #- deepin
   #- deepin-extra

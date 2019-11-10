@@ -8,8 +8,8 @@
     {
       "boot_command": "<enter><wait30>systemctl start sshd && mkdir -m 0700 /root/.ssh && echo '{{.SSHPublicKey}}' >> /root/.ssh/authorized_keys<enter>",
       "boot_wait": "10s",
-      "cpus": "2",
-      "disk_size": 40000,
+      "cpus": "1",
+      "disk_size": 25000,
       "guest_additions_mode": "disable",
       "guest_os_type": "ArchLinux_64",
       "hard_drive_interface": "sata",
@@ -37,7 +37,7 @@
           "modifyvm","{{.Name}}","--graphicscontroller","vboxsvga"
         ],
         [
-          "modifyvm","{{.Name}}","--vram","128"
+          "modifyvm","{{.Name}}","--vram","23"
         ],
         [
           "modifyvm","{{.Name}}","--rtcuseutc","on"
@@ -110,11 +110,15 @@
   "post-processors": [
     [
       {
+        "compression_level": "{{ user `compression_level` }}",
+        "output": "{{ user `vm_name` }}-{{.Provider}}-{{ timestamp }}.box",
+        "type": "vagrant"
+      },
+      {
         "type": "manifest",
         "output": "manifest.json",
         "strip_path": true
       }
     ]
-  ],
-  "_modeline": " vi: set sw=2 sts=-1 et:"
+  ]
 }
