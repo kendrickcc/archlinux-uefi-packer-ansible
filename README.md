@@ -36,7 +36,7 @@ The partion role does have parameters to create a home directory but was not use
 
 ## Users
 
-The Packer build uses Vagran's default `vagrant.pub` key from Hashicorp. This is changed on first build of a Vagrant box. Once in Vagrant, edit `ansible\roles\users\defaults\main.yaml.txt` with accounts and words as needed, then save as `main.yaml`. Also be sure to edit the `group_vars/all/00-default.yaml` and add in additional user to `global_admins`.
+The Packer build uses Vagrant's default `vagrant.pub` key from Hashicorp. This is changed on first build of a Vagrant box. Once in Vagrant, edit `ansible\roles\users\defaults\main.yaml.txt` with accounts and words as needed, then save as `main.yaml`. Also be sure to edit the `group_vars/all/00-default.yaml` and add in additional user to `global_admins`.
 
 ## Build
 
