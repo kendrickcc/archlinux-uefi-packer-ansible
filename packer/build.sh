@@ -1,3 +1,3 @@
 #!/bin/sh
 
-packer build -force packer.json
+packer build -force -on-error=ask packer.json

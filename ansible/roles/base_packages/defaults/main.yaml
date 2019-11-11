@@ -8,3 +8,8 @@ base_packages_list:
   # after we reboot
   - networkmanager
   - openssh
+  #- rng-tools
+  # VirtualBox guest requirements
+  - virtualbox-guest-modules-arch
+  - virtualbox-guest-utils
+  - xf86-video-vmware

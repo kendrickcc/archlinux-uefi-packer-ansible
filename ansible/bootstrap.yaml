@@ -1,0 +1,14 @@
+- name: Install the base system
+  hosts: all
+  become: yes
+  become_user: root
+  tags:
+    - bootstrap
+    - never
+  environment: "{{ global_proxy_env }}"
+  roles:
+    - role: custom_repos
+    # These roles pull partitioning and base_packages
+    - role: bootloader
+      tags: [bootloader]
+    - role: configure

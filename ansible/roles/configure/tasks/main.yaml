@@ -4,39 +4,33 @@
   loop:
     - sshd
     - NetworkManager
+    #- rngd
+    - vboxservice
 
-- name: Create root's .ssh
+- name: Create Vagrant user
+  shell: arch-chroot /mnt /usr/bin/useradd --comment 'Vagrant user' --create-home --user-group vagrant
+
+- name: Create Vagrant's .ssh
   file:
     state: directory
-    path:  "{{ global_mount_point }}/root/.ssh/"
+    path:  "{{ global_mount_point }}/home/vagrant/.ssh/"
+    owner: vagrant
+    group: vagrant
+    mode: '0700'
 
-- name: Check for root's autorized keys
-  stat:
-    path: /root/.ssh/authorized_keys
-  register: root_auth_keys
-
-- name: Copy root's authorized keys
+- name: Copy 10_vagrant
   copy:
-    remote_src: yes
-    src: /root/.ssh/authorized_keys
-    dest: "{{ global_mount_point }}/root/.ssh/"
-  when: root_auth_keys.stat.exists == true
+    src: 10_vagrant
+    dest: "{{ global_mount_point }}/etc/sudoers.d/10_vagrant"
+    mode: '0440'
 
-- name: Copy ssh host keys
-  copy:
-    remote_src: yes
-    src: /etc/ssh/{{ item }}
-    dest: "{{ global_mount_point }}/etc/ssh/{{ item }}"
-    mode: "0600"
-  loop:
-    - ssh_host_rsa_key
-    - ssh_host_ecdsa_key
-    - ssh_host_dsa_key
-    - ssh_host_ed25519_key
-    - ssh_host_rsa_key.pub
-    - ssh_host_ecdsa_key.pub
-    - ssh_host_dsa_key.pub
-    - ssh_host_ed25519_key.pub
+- name: Copy Vagrant's public key
+  get_url:
+    url: "https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub"
+    dest: "{{ global_mount_point }}/home/vagrant/.ssh/authorized_keys"
+    mode: '0600'
+    owner: vagrant
+    group: vagrant
 
 - name: Generate fstab
   vars:

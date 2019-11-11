@@ -1,20 +1,3 @@
-- name: Install the base system
-  hosts: all
-  tags:
-    - bootstrap
-    - never
-  environment: "{{ global_proxy_env }}"
-  roles:
-    - role: custom_repos
-    # These roles pull partitioning and base_packages
-    - role: bootloader
-      tags: [bootloader]
-    - role: configure
-  post_tasks:
-   - name: Reboot into the system
-     tags: reboot
-     reboot:
-
 - name: Configure the installed system
   hosts: all
   tags: mainconfig
@@ -29,7 +12,6 @@
     - role: custom_repos
     - role: users
     - role: locale
-    - role: proxy
     - role: virtguest
       tags: [virtguest]
     - role: utils
@@ -42,6 +24,3 @@
   roles:
     - role: clean
       tags: clean
-  post_tasks:
-    - reboot:
-      tags: reboot

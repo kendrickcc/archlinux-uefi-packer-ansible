@@ -46,5 +46,9 @@
     fstype: ext4
     state: mounted
 
+- name: Check for swap
+  command: swapon --show=NAME --noheadings
+  register: swapon_files
+
 - name: swap make and enable
   shell: mkswap {{ partition.name }}{{ partition.volumes.swap.number }} && swapon {{ partition.name }}{{ partition.volumes.swap.number }}
