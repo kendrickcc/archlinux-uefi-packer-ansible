@@ -18,9 +18,9 @@
     group: vagrant
     mode: '0700'
 
-- name: Copy 10_vagrant
+- name: Copy 10_vagrant from /etc/sudoers.d to /mnt/etc/sudoers.d
   copy:
-    src: 10_vagrant
+    src: "/etc/sudoers.d/10_vagrant"
     dest: "{{ global_mount_point }}/etc/sudoers.d/10_vagrant"
     mode: '0440'
 
