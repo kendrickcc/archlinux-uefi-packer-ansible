@@ -41,3 +41,13 @@ The Packer build uses Vagran's default `vagrant.pub` key from Hashicorp. This is
 ## Build
 
 Run `build.sh` or cat the contents and edit as necessary. Results in a Vagrant box which is added by executing `vagrant box add --name[your box name] archlinux-[build date].box`. Then change to the Vagrant directory and edit the `Vagrantfile` as needed, then simply `vagrant up`. You can then choose to access the VM using `vagrant ssh`, or access the VM directly and use user credentials provided.
+
+### Basic build flow
+
+The ISO is download and booted, then a script is used as the boot command that simply creates the Vagrant user account, modifies sudoers, then starts the SSH service. After this step, Ansible is then able to be used as a provisioner, installed using the Vagrant account, calling the bootstrap.yaml playbook. This should export a Vagrant box build in the Packer directory.
+
+Then switch to Vagrant and edit the Vagrantfile as needed. Using the same Ansible directory, the site.yaml playbook is called to perform the user customizations desired. 
+
+## Summary
+
+I realize this is not a "devops" build but it helped me learn Ansible. I expected to do this all using Puppet, which I still may do eventually. I felt Ansible was a little "lighter" for this effort. If this were a larger build with many more VMs, then I think Puppet would be the better solution to help insure VMs maintained configuration. This was simply a desire for me to test out different destkop environments on Linux, and I thought Archlinux was the best base to start with.
