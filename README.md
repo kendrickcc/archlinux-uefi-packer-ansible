@@ -2,7 +2,7 @@
 
 Credits: [binary-many/arch-ansible](https://github.com/binary-manu/arch-ansible)
 
-This started as an effort to build a base Archlinux box where I could try out various destkop environments, wash, rinse and repeat. I chose to build my own box instead of using the `archlinux/archinux` Vagrant box because I wanted a different disk partition, to include a swap file. Starting with Packer and Ansible based on the build by `binary-manu`, this morphed eventually into a Vagrant box where I could then use Ansible tags to build desktop environments. 
+This started as an effort to build a base Archlinux box where I could try out various destkop environments, wash, rinse and repeat. I chose to build my own box instead of using the `archlinux/archinux` Vagrant box because I wanted a different disk partition, to include a swap file. And I also wanted to understand Packer better. Starting with Packer and Ansible based on the build by `binary-manu`, this morphed eventually into a Vagrant box where I could then use Ansible tags to build desktop environments. 
 
 The Packer build attempts to use Ansible for the initial build and configuration. There are many shell calls within the build, but it is still mostly within Ansible. Then Ansible is used again in Vagrant for box customizations. 
 
