@@ -4,6 +4,8 @@ Credits: [binary-many/arch-ansible](https://github.com/binary-manu/arch-ansible)
 
 This started as an effort to build a base Archlinux box where I could try out various destkop environments, wash rinse and repeat. I chose to build my own box instead of using the `archlinux/archinux` Vagrant box because I wanted a different disk partition, to include a swap file. Starting with Packer and Ansible based on the build by `binary-manu`, this morphed eventually into a Vagrant box where I could then use Ansible tags to build desktop environments. 
 
+The Packer build attempts to use Ansible for the initial build and configuration. There are many shell calls within the build, but it is still mostly within Ansible. Then Ansible is used again in Vagrant for box customizations. 
+
 ## Versions used
 
 - VirtualBox 6.0.14
@@ -20,7 +22,8 @@ This started as an effort to build a base Archlinux box where I could try out va
 - 3 partition system using GRUB efibootmgr. 
     - /dev/sda1 256 MiB esp 
     - /dev/sda2 4 GiB swap
-    - /dev/sda3 37 GiB (or what remains) /
+    - /dev/sda3 ~23 GiB mounted as root drive (`/`)
+        - Roughly what remains of the drive size specified.
 
 The partion role does have parameters to create a home directory but was not used.
 
