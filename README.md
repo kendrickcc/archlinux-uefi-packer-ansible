@@ -46,8 +46,8 @@ Run `build.sh` or cat the contents and edit as necessary. Results in a Vagrant b
 
 The ISO is download and booted, then a script is used as the boot command that simply creates the Vagrant user account, modifies sudoers, then starts the SSH service. After this step, Ansible is then able to be used as a provisioner, installed using the Vagrant account, calling the bootstrap.yaml playbook. This should export a Vagrant box build in the Packer directory.
 
-Then switch to Vagrant and edit the Vagrantfile as needed. Using the same Ansible directory, the site.yaml playbook is called to perform the user customizations desired. 
+Then switch to Vagrant and edit the Vagrantfile as needed, being sure to edit the Vagrant box name you added from the Packer build, on line 4. Using the same Ansible directory, the site.yaml playbook is called to perform the user customizations desired. 
 
 ## Summary
 
-I realize this is not a "devops" build but it helped me learn Ansible. I expected to do this all using Puppet, which I still may do eventually. I felt Ansible was a little "lighter" for this effort. If this were a larger build with many more VMs, then I think Puppet would be the better solution to help insure VMs maintained configuration. This was simply a desire for me to test out different destkop environments on Linux, and I thought Archlinux was the best base to start with.
+I realize this is not a "devops" build but it helped me learn Ansible. I expected to do this all using Puppet, which I still may do eventually. I felt Ansible was a little "lighter" for this effort. If this were a larger build with many more VMs, then I may look at Puppet as I like the agent on the VMs to maintain configuration. Trying to use Puppet in a masterless mode seemed a little overkill considering all the modules I have needed to download and install. This was simply a desire for me to test out different destkop environments on Linux, and I thought Archlinux was the best base to start with, and Ansible was simple enough to modify the build. 
