@@ -1,0 +1,5 @@
+- name: Install xorg-server packages
+  pacman:
+      name: "{{ packages }}"
+      state: latest
+      update_cache: yes

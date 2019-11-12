@@ -1,0 +1,12 @@
+- name: Install plasma and necessary packages
+  pacman:
+      name: "{{ packages }}"
+      state: latest
+      update_cache: yes
+
+#- name: Enable and start sddm service
+#  service:
+#      name: sddm
+#      state: started
+#      enabled: yes
+

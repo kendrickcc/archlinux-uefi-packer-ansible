@@ -4,8 +4,6 @@
   loop:
     - sshd
     - NetworkManager
-    #- rngd
-    - vboxservice
 
 - name: Create Vagrant user
   shell: arch-chroot /mnt /usr/bin/useradd --comment 'Vagrant user' --create-home --user-group vagrant
@@ -20,7 +18,7 @@
 
 - name: Copy 10_vagrant from /etc/sudoers.d to /mnt/etc/sudoers.d
   copy:
-    src: "/etc/sudoers.d/10_vagrant"
+    src: 10_vagrant
     dest: "{{ global_mount_point }}/etc/sudoers.d/10_vagrant"
     mode: '0440'
 

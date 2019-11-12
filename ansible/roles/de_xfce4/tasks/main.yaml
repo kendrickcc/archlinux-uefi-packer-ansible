@@ -1,0 +1,4 @@
+- name: Install plasma and necessary packages
+  pacman:
+      name: "{{ packages }}"
+      update_cache: yes

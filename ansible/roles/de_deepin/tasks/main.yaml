@@ -1,0 +1,18 @@
+- name: Install deepin packages
+  pacman:
+      name: "{{ packages }}"
+      state: latest
+      update_cache: yes
+
+- name: Update lightdm.conf
+  lineinfile:
+      path: /etc/lightdm/lightdm.conf
+      regexp: '^greeter-session=example-gtk-gnome'
+      line: 'greeter-session=lightdm-deepin-greeter'
+
+#- name: Enable and start lightdm service
+#  service:
+#      name: lightdm
+#      state: started
+#      enabled: yes
+

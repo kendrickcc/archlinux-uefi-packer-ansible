@@ -1,0 +1,2 @@
+install gdm, plasma and sddm
+systemctl enable sddm
