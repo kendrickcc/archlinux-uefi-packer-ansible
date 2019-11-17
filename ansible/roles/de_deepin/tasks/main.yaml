@@ -7,12 +7,5 @@
 - name: Update lightdm.conf
   lineinfile:
       path: /etc/lightdm/lightdm.conf
-      regexp: '^greeter-session=example-gtk-gnome'
+      insertafter: '^[Seat:*]'
       line: 'greeter-session=lightdm-deepin-greeter'
-
-#- name: Enable and start lightdm service
-#  service:
-#      name: lightdm
-#      state: started
-#      enabled: yes
-

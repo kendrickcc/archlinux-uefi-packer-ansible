@@ -4,9 +4,9 @@
       state: latest
       update_cache: yes
 
-#- name: Enable and start sddm service
-#  service:
-#      name: sddm
-#      state: started
-#      enabled: yes
+- name: Update lightdm.conf
+  lineinfile:
+      path: /etc/lightdm/lightdm.conf
+      insertafter: '^[Seat:*]'
+      line: 'greeter-session=lightdm-gtk-greeter'
 

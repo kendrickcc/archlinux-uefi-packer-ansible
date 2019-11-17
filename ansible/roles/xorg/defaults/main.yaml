@@ -1,2 +1,4 @@
 packages:
-  - xorg-server
+  - xorg
+  - lightdm
+  - lightdm-gtk-greeter

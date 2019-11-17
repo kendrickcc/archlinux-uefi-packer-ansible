@@ -1,5 +1,12 @@
-- name: Install xorg-server packages
+- name: Install xorg, lightdm packages, start lightdm
   pacman:
       name: "{{ packages }}"
       state: latest
       update_cache: yes
+
+- name: Enable and start lightdm service
+  service:
+      name: lightdm
+      state: started
+      enabled: yes
+
