@@ -4,9 +4,9 @@
       state: latest
       update_cache: yes
 
-- name: Enable and start lightdm service
-  service:
-      name: lightdm
-      state: started
-      enabled: yes
+#- name: Enable and start lightdm service
+#  service:
+#      name: lightdm
+#      state: started
+#      enabled: yes
 
